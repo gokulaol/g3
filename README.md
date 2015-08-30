@@ -1,5 +1,6 @@
 # g3
 core intuits repository
+-----------------------
 
 general architecture
 + server side
@@ -7,3 +8,5 @@ general architecture
 + common NLP libraries?
 + GUI / D3
 
+
+in future, this might be a private repository.
