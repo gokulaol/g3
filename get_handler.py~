@@ -1,0 +1,11 @@
+#!/usr/bin/python
+
+
+class GetHandler
+
+        self.wfile.write("<html><head><title>Guru. Grace. Gratitude</title></head>")
+        self.wfile.write("<body> <p> Guru. Grace. Gratitude </p> ")
+        # If someone went to "http://something.somewhere.net/foo/bar/",
+        # then self.path equals "/foo/bar/".
+        self.wfile.write("<p>You accessed path: %s</p>" % self.path)
+        self.wfile.write("</body></html>")
