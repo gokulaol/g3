@@ -15,6 +15,7 @@ function buttonSaveHandler()
     d_place     = document.getElementById("placeInput").value
     d_knowledge = document.getElementById("knowledgeInput").value
     var d_json = {
+	'd_type'      : 'KNOWLEDGE_INPUT_SAVE',
 	'd_title'     : d_title,
 	'd_date'      : d_date,
 	'd_place'     : d_place,
