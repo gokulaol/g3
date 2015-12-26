@@ -17,6 +17,8 @@ from pprint import pprint
 from arguments import global_args, parse_arguments
 from arguments import print_exception, debug_print, debug_pprint
 
+from handle_requests import HandleRequest
+
 ## simple testing
 
 @route('/hello')
@@ -124,7 +126,10 @@ def handles_save():
     input_data['date'] = request.forms.get('d_date')
     
     debug_pprint(4, "save handler:", input_data)
-    return "<p> HEE HEE: Your login information was correct.</p>"
+
+    hr = HandleRequest('POST', input_data)
+    
+    return hr.get_return_data()
     
     
 
