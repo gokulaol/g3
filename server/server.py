@@ -82,7 +82,7 @@ def serve_normal_files(n_file_name):
     # get the name of the actual file 
     file_name = os.path.basename(n_file_name)
         
-    print "normal files: file_name = ", file_name
+    debug_print(5, "normal files: file_name = ", file_name)
 
     # search in the path
     containing_dir = find_containing_dir(file_name, global_args.base_dir)
@@ -93,7 +93,7 @@ def serve_normal_files(n_file_name):
 
 @route('/images/<file_name>')
 def serve_image_files(file_name):
-    print "image files: file_name = ", file_name
+    debug_print(5, "image files: file_name = ", file_name)
     return static_file(file_name, root=global_args.base_dir + 'images')
 
     

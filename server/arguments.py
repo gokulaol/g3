@@ -9,19 +9,30 @@ import linecache
 
 from pprint import pprint
 
-DEFAULT_BASE_DIR='/Users/gokul/git_repositories/g3/server'
+DEFAULT_BASE_DIR='/Users/gokul/git_repositories/g3/server/'
+DEFAULT_LISTEN_HOST='localhost'
+DEFAULT_LISTEN_PORT='8090'
 
 # dummy class (argument holder)
 class Arguments:
     debug_level = 0
-    base_dir    = '/Users/gokul/git_repositories/g3/server'
-    listen_host = 'localhost'
-    listen_port = '8090'
+    base_dir    = DEFAULT_BASE_DIR
+    listen_host = DEFAULT_LISTEN_HOST
+    listen_port = DEFAULT_LISTEN_PORT
 
     def __init__(self):
         return
 
+    def _make_dict(self):
+        print_dict = {}
+        print_dict['debug_level'] = self.debug_level
+        print_dict['base_dir']    = self.base_dir
+        print_dict['listen_host'] = self.listen_host
+        print_dict['listen_port'] = self.listen_port
+        return print_dict
+    
     def __repr__(self):
+        print self._make_dict()
         ret_str = 'debug_level = ' + str(self.debug_level)
         ret_str += ', base_dir = ' + self.base_dir
         ret_str += ', listen_host = ' + self.listen_host
@@ -29,13 +40,9 @@ class Arguments:
         return ret_str
 
     def __str__(self):
-        print_dict = {}
-        print_dict['debug_level'] = self.debug_level
-        print_dict['base_dir']    = self.base_dir
-        print_dict['listen_host'] = self.listen_host
-        print_dict['listen_port'] = self.listen_port
-        pprint(print_dict)
-        return "\n"
+        pd = self._make_dict()
+        pprint(pd)
+        return json.dumps(pd)
 
 
 # this will be imported into other files
@@ -117,8 +124,11 @@ def parse_arguments():
 
     # do any processing of input args here
     # and return the processed args
-    global_args.debug_level = args.debug
-    global_args.base_dir = args.base_dir
+    if args.debug != None:
+        global_args.debug_level = args.debug
+
+    if args.base_dir != None:    
+        global_args.base_dir = args.base_dir
 
     if args.listen_host != None:
         global_args.listen_host = args.listen_host
