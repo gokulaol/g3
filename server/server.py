@@ -124,6 +124,7 @@ def handles_save():
     input_data['knowledge'] = request.forms.get('d_knowledge')
     input_data['place'] = request.forms.get('d_place')
     input_data['date'] = request.forms.get('d_date')
+    input_data['type'] = request.forms.get('d_type')
     
     debug_pprint(4, "save handler:", input_data)
 
