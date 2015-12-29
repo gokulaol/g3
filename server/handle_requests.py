@@ -13,10 +13,7 @@ class HandleRequest:
     def handle_post(self):
 
         if self.req_params['d_type'] == 'KNOWLEDGE_INPUT_SAVE':
-
-            
-        
-        debug_print(5, "", self.req_params)
-        debug_print(5, "", "POST")
+            debug_print(5, "", self.req_params)
+            debug_print(5, "", "POST")
         
         return "<p> HEE HEE: Your login information was correct.</p>"
