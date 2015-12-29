@@ -130,8 +130,22 @@ def handles_save():
 
     hr = HandleRequest('POST', input_data)
     
-    return hr.get_return_data()
+    return hr.handle_post()
+
+# Handle POST request for search
+@post('/search')
+def handles_search():
+
+    input_data = {}
     
+    input_data['keyword'] = request.forms.get('d_keyword')
+    input_data['type'] = request.forms.get('d_type')
+    
+    debug_pprint(4, "search handler:", input_data)
+
+    hr = HandleRequest('POST', input_data)
+    
+    return hr.handle_post()    
     
 
 #@route('/images/<filename:re:.*\.png>')
