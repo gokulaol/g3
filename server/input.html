@@ -89,8 +89,9 @@
       
     <div class="container" >
       <form class="form-horizontal">
-	<div class="jumbotron">	
-	  <!-- First: Current Action:  INPUT or RETRIEVE the knowledge -->
+	<div class="jumbotron">
+	  
+	  <!-- FIRST ROW: Current Action:  INPUT or RETRIEVE the knowledge -->
           <div class="row">
             <div class="col-xs-6">
               <div class="input-group">
@@ -112,8 +113,44 @@
             </div>
           </div>
 	  <br>
+
+	  <!-- SECOND ROW: Knowledge Series Series-->
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="input-group">
+                <div class="input-group-btn" "margin-bottom"=15px>
+                  <button tabindex="-1" class="btn btn-default" type="button">Knowledge Series</button>
+                  <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li id="intimateNote"><a href="#">An Intimate Note to a Sincere Seeker</a></li>
+                    <li class="divider"></li>
+                    <li id="satsangKnowledge"><a href="#">Satsang Knowledge</a></li>
+                    <li class="divider"></li>
+                    <li id="bhaktiSutras"><a href="#">Bhakti Sutras</a></li>
+                    <li class="divider"></li>
+                    <li id="yogaSutras"><a href="#">Patanjali Yoga Sutras</a></li>
+                    <li class="divider"></li>
+                    <li id="ashtavakraGita"><a href="#">Ashtavakra Gita</a></li>
+                    <li class="divider"></li>
+                    <li id="shivaSutras"><a href="#">Shiva Sutras</a></li>
+                    <li class="divider"></li>
+                    <li id="kenopanishad"><a href="#">Kena Upanishad</a></li>
+                    <li class="divider"></li>
+                    <li id="kathopanishad"><a href="#">Katha Upanishad</a></li>
+		    <!--                    <li class="divider"></li> -->
+                    <!-- <li><a href="#">Separated link</a></li> -->
+                  </ul>
+                </div>
+                <input type="text" class="form-control" id="seriesChoice"/>
+              </div>
+            </div>
+          </div>
+	  <br>
 	  
-	  <!-- Second: the Title of the knowledge sheet -->	  
+	  <!-- THIRD ROW: the Title of the knowledge sheet -->	  
 	  <div class="row" class="form-group">
 	    <div class="col-md-1">
 	      <label for="titleInput">Title</label>
@@ -124,7 +161,7 @@
 	  </div>
 	  <br>
 	  
-	  <!-- Third: Date and Place of the knowledge sheet -->
+	  <!-- FOURTH ROW: Date and Place of the knowledge sheet -->
 	  <div class="row" class="form-group">
 	    <div class="col-md-1">
 	      <label for="dateInput">Date</label>
@@ -151,7 +188,7 @@
 	  </div>
 	  <br>
 
-	  <!-- Fourth: Sheet# and SheetID -->
+	  <!-- FIFTH ROW: Sheet# and SheetID -->
 	  <div class="row" class="form-group">
 	    <div class="col-md-1">
 	      <label for="sheetNoInput">Sheet # </label>
@@ -178,7 +215,7 @@
 	  </div>
 	  <br>
 
-	  <!-- Fifth: Text Area -->
+	  <!-- SIXTH ROW: Text Area -->
 	  <div class="row" class="form-group">
 	    <div class="col-md-8">
 	      <label for="knowledgeInput">Enter the Knowledge: </label>
@@ -188,7 +225,7 @@
 	  <hr>
 
 
-	  <!-- Sixth: Buttons -->
+	  <!-- SEVENTH ROW: Buttons -->
 	  <div class="row" class="form-group">
 	    <!-- Button SAVE -->
 	    <div class="col-md-2">
@@ -250,7 +287,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap-3.3.4/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
     <script src="bootstrap-3.3.4/js/bootstrap-datepicker.js"></script>
-    <script src="main.js"></script>
+    <script src="input.js"></script>
     <script type="text/javascript">
     </script>
   </body>

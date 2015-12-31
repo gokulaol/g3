@@ -116,11 +116,12 @@ def serve_bootstrap_files(b_file_name):
 
 # Handle POST request for save
 @post('/save')
-def handles_save():
+def handle_save():
 
     input_data = {}
     
     input_data['title'] = request.forms.get('d_title')
+    input_data['series'] = request.forms.get('d_series')
     input_data['knowledge'] = request.forms.get('d_knowledge')
     input_data['place'] = request.forms.get('d_place')
     input_data['date'] = request.forms.get('d_date')
