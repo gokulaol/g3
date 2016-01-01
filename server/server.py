@@ -120,12 +120,14 @@ def handle_save():
 
     input_data = {}
     
-    input_data['title'] = request.forms.get('d_title')
-    input_data['series'] = request.forms.get('d_series')
-    input_data['knowledge'] = request.forms.get('d_knowledge')
-    input_data['place'] = request.forms.get('d_place')
-    input_data['date'] = request.forms.get('d_date')
-    input_data['type'] = request.forms.get('d_type')
+    input_data['d_type'] = request.forms.get('d_type')
+    input_data['d_title'] = request.forms.get('d_title')
+    input_data['d_series'] = request.forms.get('d_series')
+    input_data['d_sheetid'] = request.forms.get('d_sheetid')
+    input_data['d_sheetno'] = request.forms.get('d_sheetno')
+    input_data['d_place'] = request.forms.get('d_place')
+    input_data['d_date'] = request.forms.get('d_date')
+    input_data['d_knowledge'] = request.forms.get('d_knowledge')
     
     debug_pprint(4, "save handler:", input_data)
 
@@ -139,8 +141,8 @@ def handles_search():
 
     input_data = {}
     
-    input_data['keyword'] = request.forms.get('d_keyword')
-    input_data['type'] = request.forms.get('d_type')
+    input_data['d_type'] = request.forms.get('d_type')
+    input_data['d_keyword'] = request.forms.get('d_keyword')
     
     debug_pprint(4, "search handler:", input_data)
 

@@ -1,3 +1,21 @@
+
+// Set some global variables for ease
+button_save     = document.getElementById("buttonSave")
+button_harden   = document.getElementById("buttonHarden")
+button_retrieve = document.getElementById("buttonRetrieve")
+button_next     = document.getElementById("buttonNext")
+
+// Onload handler called when the page gets loaded
+function onLoadHandler()
+{    
+    button_save.disabled = true
+    button_harden.disabled = true
+    button_retrieve.disabled = true
+    button_next.disabled = true
+}
+
+window.onload = onLoadHandler
+
 //
 // Button Handlers
 //
@@ -15,12 +33,21 @@ function buttonSaveHandler()
     d_place     = document.getElementById("placeInput").value
     d_knowledge = document.getElementById("knowledgeInput").value
     d_series    = document.getElementById("seriesChoice").value
+    d_sheetid   = document.getElementById("sheetIdInput").value
+    d_sheetno   = String(document.getElementById("sheetNoInput").value)
+    // special case: trim the "An Intimate Note..." name to
+    //               handle efficiently at the server
+    if (d_series == "An Intimate Note to a Sincere Seeker") {
+	d_series = "An Intimate Note";
+    }
     var d_json = {
 	'd_type'      : 'KNOWLEDGE_INPUT_SAVE',
 	'd_title'     : d_title,
 	'd_date'      : d_date,
 	'd_place'     : d_place,
 	'd_series'    : d_series,
+	'd_sheetid'   : d_sheetid,
+	'd_sheetno'   : d_sheetno,	
 	'd_knowledge' : d_knowledge
     }
     // the path is '/save'
@@ -140,10 +167,23 @@ $('#kathopanishad').click(
     }
 );
 
+$('#knowledgeInput').keyup(function(event) {
+    var k_len = document.getElementById("knowledgeInput").value.length
+    var k_val = document.getElementById("knowledgeInput").value
+    // may not be the most efficient way to do this test
+    if (k_len > 0) {
+	if (/[a-zA-Z]/.test(k_val)) {	
+	    button_save.disabled = false
+	    return
+	}
+    }
+    // else
+    button_save.disabled = true
+})
 
 $('#dateInput').datepicker({
-    format: 'mm/dd/yyyy',
-    startDate: '-3d',
+    format: 'mm-dd-yyyy',
+    startDate: '05-13-1956',
     autoclose: 'true'
 })
 

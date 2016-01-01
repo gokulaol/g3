@@ -8,6 +8,7 @@ import inspect
 import linecache
 
 from pprint import pprint
+from prettytable import PrettyTable
 
 DEFAULT_BASE_DIR='/Users/gokul/git_repositories/g3/server/'
 DEFAULT_LISTEN_HOST='localhost'
@@ -98,6 +99,54 @@ def print_exception(terminate):
     if terminate:
         sys.exit(0)
 
+
+# print a prettytable from a dictionary
+# (where each key has value of same # of columns)
+def print_table_from_dict(first_row, p_dict):
+    d_first_row = list(first_row)
+    d_first_row.insert(0,'')
+
+    d_table = PrettyTable(d_first_row)
+    
+    row_no = 1
+    for key,val in p_dict.iteritems():    
+        d_row = [ str(row_no), key, val ]
+        d_table.add_row(d_row)
+        row_no += 1
+
+    print d_table
+    
+# print all arguments as table
+def print_args_as_table():
+
+    # args_table -> a_table
+    a_first_row = ["Argument/Parameter", "Value"]
+    a_first_row.insert(0,'')
+
+    a_table = PrettyTable(a_first_row)
+
+    a_dict = global_args._make_dict()
+
+    port = a_dict.pop('listen_port')
+    
+    row_no = 1
+    for key,val in a_dict.iteritems():
+        if key == "listen_host":
+            val = "\033[31m " + "https://" + val + ":" + str(port) + '/' + "\033[0m"
+        a_row = [ str(row_no), key, val ]
+        a_table.add_row(a_row)
+        row_no += 1
+
+    print a_table
+    '''
+    # Make 'Critical' RED.
+    if vd_item['summary'].lower().startswith('critical'):
+    txt = "\033[31;43m" + vd_item['summary'] + "\033[0m"
+    txt = "\033[31;43m" + vd_item['summary'] + "\033[0m"
+    '''
+    
+    return
+    
 # this is not a class method
 def parse_arguments():
 
@@ -135,7 +184,10 @@ def parse_arguments():
 
     if args.port != None:
         global_args.listen_port = args.port
-    
+
+    # print all given arguments as neat table
+    print_args_as_table()
+        
     debug_pprint(3, "Command Line Args:", global_args)
 
     return

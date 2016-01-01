@@ -194,8 +194,8 @@
 	      <label for="sheetNoInput">Sheet # </label>
 	    </div>
 	    <div class="col-md-3">
-              <div class="input-group" id="sheetNoInput">
-                <input type='text' class="form-control" />
+              <div class="input-group">
+                <input type="number" id="sheetNoInput" class="form-control" />
                 <span class="input-group-addon">
                   <span class="glyphicon glyphicon-star"></span>
                 </span>
@@ -231,7 +231,7 @@
 	    <div class="col-md-2">
               <div class="btn-group btn-group-lg" role="group">
 		<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-		<button type="button" class="btn btn-primary" onclick="buttonSaveHandler()">
+		<button type="button" class="btn btn-primary" onclick="buttonSaveHandler()" id="buttonSave">
 		  Save <span class="glyphicon glyphicon-floppy-save"></span>
 		</button>
               </div>
@@ -241,7 +241,7 @@
 	    <div class="col-md-2">
               <div class="btn-group btn-group-lg" role="group">
 		<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-		<button type="button" class="btn btn-success" onclick="buttonHardenHandler()">
+		<button type="button" class="btn btn-success" onclick="buttonHardenHandler()" id="buttonHarden">
 		  Harden <span class="glyphicon glyphicon-floppy-saved"></span>
 		</button>
               </div>
@@ -251,7 +251,7 @@
 	    <div class="col-md-2">
               <div class="btn-group btn-group-lg" role="group">
 		<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-		<button type="button" class="btn btn-info" onclick="buttonRetrieveHandler()">
+		<button type="button" class="btn btn-info" onclick="buttonRetrieveHandler()" id="buttonRetrieve">
 		  Retrieve <span class="glyphicon glyphicon-export"></span>
 		</button>
               </div>
@@ -261,7 +261,7 @@
 	    <div class="col-md-2">
               <div class="btn-group btn-group-lg" role="group">
 		<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-		<button type="button" class="btn btn-warning" onclick="buttonNextHandler()">
+		<button type="button" class="btn btn-warning" onclick="buttonNextHandler()" id="buttonNext">
 		  Next <span class="glyphicon glyphicon-arrow-right"></span>
 		</button>
               </div>
