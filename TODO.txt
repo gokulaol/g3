@@ -1,3 +1,5 @@
 
-- SSL requests
+- wordogram? (canturk's site)
+- possible GUIs : search, q&a, conversation.
+-
 - 

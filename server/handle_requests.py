@@ -64,7 +64,8 @@ class HandleRequest:
             # now write to a file
             full_file_name = global_args.base_dir + 'data/files/' + file_name
             with open(full_file_name, 'w') as outfile:
-                json.dump(self.req_params, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
+                json.dump(self.req_params, outfile, sort_keys = True,
+                          indent = 4, ensure_ascii=False)
 
             return "<p> HEE HEE: Your login information was correct.</p>"
 
