@@ -24,7 +24,8 @@ function buttonSearchHandler()
 	data    : d_json,
 	success : function (data) {     
 	    alert("SUCCESS"); alert(data);
-	    $('#search-result-jumbotron').append(data);
+	    //$('#search-result-jumbotron').append(data);
+	    $('#search-container').html(data);
 	},
 	//	error   : function (data) { alert("ERROR"); alert(JSON.stringify(data)); },
     });
@@ -33,5 +34,5 @@ function buttonSearchHandler()
     //	contentType: 'application/json; charset=utf-8',
 
     msg = 'POSTING : ' + JSON.stringify(d_json);
-    alert(msg);
+    //    alert(msg);
 }

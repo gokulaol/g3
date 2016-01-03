@@ -5,6 +5,7 @@ import json
 
 from arguments import global_args, print_exception, debug_print, debug_pprint, print_table_from_dict
 from mongodb_related import mongo_search
+from html_generator import TwitterBootstrap_HTMLGenerator
 
 class HandleRequest:
     
@@ -14,22 +15,48 @@ class HandleRequest:
         return
 
     def handle_knowledge_search(self):
-        html_content = "<div class=\"row\">"
-        html_content += "<div class=\"col-xs-9\">"
-	html_content += "<div class=\"panel panel-primary\">"
-	html_content += "<div class=\"panel-heading\">"
-	html_content += "<h3 class=\"panel-title\">Panel title</h3>"
-	html_content += "</div>"
-	html_content += "<div class=\"panel-body\">"
-	html_content += "Search Result 1"
-	html_content += "</div>"
-	html_content += "<div class=\"panel-footer\">Panel footer</div>"
-	html_content += "</div>"
-	html_content += "</div>"
-	html_content += "</div>"	
 
-        return html_content
+        try:
 
+            search_term = self.req_params['d_keyword']
+        
+            # do the mongo_search here
+            # for now, limit the items to 10 entries
+            item_limit = 10
+            results = mongo_search(search_term, item_limit)
+
+            # search results are in a list, with each
+            # entry being a dictionary.
+
+            tbg = TwitterBootstrap_HTMLGenerator()
+
+            # use our bootstrap adapter to generate HTML
+            # but also wrap it in a "jumbotron" class
+            html = '<div class="jumbotron" id="search-result-jumbotron">'
+            for item in results:
+                # Let us make a panel_footer before calling to generate
+                # the entire panel code.
+                footer =  '<b> Date: </b>' + item['d_date'] + '&nbsp &nbsp'
+                footer += '<b> Place: </b>' + item['d_place']
+
+                html += tbg.generate_panel(n_columns=9,
+                                           panel_color='light-blue',
+                                           panel_body=item['d_knowledge'],
+                                           panel_title=item['d_title'],
+                                           panel_footer=footer)
+            # in this case, we will add the date and place by ourselves.
+            # hence panel_footer was passed as None.
+            # of the 9 columns, have Date in 1-4 and Place in 6-9 (leave 5 empty)
+            #     'Date: ' + item['d_date'] + ' Place: ' + item['d_place'])
+            
+            
+            html += '</div>'
+            debug_print(5,"HTML Code:", html)
+            return html
+
+        except:
+
+            print_exception(True)
     
     # save the given knowledge into an input file
     # we save every sheet in a unique file

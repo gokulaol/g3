@@ -180,8 +180,6 @@ def server_init():
     # init the mongo.
     mongo_init()
 
-    # try a mongo_search here
-    mongo_search('consciousness', 10)
     
 # 
 #  NOTE: the following code starts the bottle server with

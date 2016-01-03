@@ -81,11 +81,9 @@ def mongo_search(search_term, return_limit):
         debug_print(5,"search_term:", s_term)
 
         x = know_col.find(s_term).limit(return_limit)
-        y = know_col.find()
-        for item in y:
-            print item
+
         for item in x :
-            debug_print(2, "Item: ", item)
+            debug_print(6, "Item: ", item)
             result.append(item)
 
         return result
