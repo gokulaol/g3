@@ -1,5 +1,5 @@
 
-- wordogram? (canturk's site)
-- possible GUIs : search, q&a, conversation.
--
-- 
++ wordogram? (canturk's site)
+ - possible GUIs : search, q&a, conversation.
++ mongo indexes
++ 

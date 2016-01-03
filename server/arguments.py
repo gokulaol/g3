@@ -12,14 +12,36 @@ from prettytable import PrettyTable
 
 DEFAULT_BASE_DIR='/Users/gokul/git_repositories/g3/server/'
 DEFAULT_LISTEN_HOST='localhost'
-DEFAULT_LISTEN_PORT='8090'
+DEFAULT_LISTEN_PORT=8090
+DEFAULT_MONGO_HOST='localhost'
+DEFAULT_MONGO_PORT=27017
 
+
+# global variable for displaying colors in bash
+class ColorPalette:
+    # red prefix with a background.
+    # RED_PREFIX="\033[31;43m "
+    RED_PREFIX="\033[31m "
+    RED_POSTFIX=" \033[0m"
+
+    def __init__(self):
+        return
+
+    # make the string RED and return
+    def red(self, s):
+        return self.RED_PREFIX + s + self.RED_POSTFIX
+
+# instantiate for use from other files
+color = ColorPalette()
+    
 # dummy class (argument holder)
 class Arguments:
     debug_level = 0
     base_dir    = DEFAULT_BASE_DIR
     listen_host = DEFAULT_LISTEN_HOST
     listen_port = DEFAULT_LISTEN_PORT
+    mongo_host  = DEFAULT_MONGO_HOST
+    mongo_port  = DEFAULT_MONGO_PORT
 
     def __init__(self):
         return
@@ -30,6 +52,8 @@ class Arguments:
         print_dict['base_dir']    = self.base_dir
         print_dict['listen_host'] = self.listen_host
         print_dict['listen_port'] = self.listen_port
+        print_dict['mongo_host'] = self.mongo_host
+        print_dict['mongo_port'] = self.mongo_port
         return print_dict
     
     def __repr__(self):
@@ -37,7 +61,9 @@ class Arguments:
         ret_str = 'debug_level = ' + str(self.debug_level)
         ret_str += ', base_dir = ' + self.base_dir
         ret_str += ', listen_host = ' + self.listen_host
-        ret_str += ', listen_port = ' + self.listen_port
+        ret_str += ', listen_port = ' + str(self.listen_port)
+        ret_str += ', mongo_host = ' + self.mongo_host
+        ret_str += ', mongo_port = ' + str(self.mongo_port)
         return ret_str
 
     def __str__(self):
@@ -127,12 +153,15 @@ def print_args_as_table():
 
     a_dict = global_args._make_dict()
 
-    port = a_dict.pop('listen_port')
+    listen_port = a_dict.pop('listen_port')
+    mongo_port = a_dict.pop('mongo_port')
     
     row_no = 1
     for key,val in a_dict.iteritems():
         if key == "listen_host":
-            val = "\033[31m " + "https://" + val + ":" + str(port) + '/' + "\033[0m"
+            val = "\033[31m " + "https://" + val + ":" + str(listen_port) + '/' + "\033[0m"
+        if key == "mongo_host":
+            val = "\033[31m " + "MongoDB: " + val + ":" + str(mongo_port) + "\033[0m"
         a_row = [ str(row_no), key, val ]
         a_table.add_row(a_row)
         row_no += 1
@@ -165,8 +194,14 @@ def parse_arguments():
     parser.add_argument("-l", "--listen_host", type=str,
                         help="host (or ip) to listen on")
 
-    parser.add_argument("-p", "--port", type=str,
+    parser.add_argument("-m", "--mongo_host", type=str,
+                        help="host (or ip) that MongoDB is listening on")
+
+    parser.add_argument("-p", "--listen_port", type=int,
                         help="port to listen on")
+    
+    parser.add_argument("-q", "--mongo_port", type=int,
+                        help="port that MongoDB is listening on")
     
     
     args = parser.parse_args()
@@ -182,8 +217,8 @@ def parse_arguments():
     if args.listen_host != None:
         global_args.listen_host = args.listen_host
 
-    if args.port != None:
-        global_args.listen_port = args.port
+    if args.listen_port != None:
+        global_args.listen_port = args.listen_port
 
     # print all given arguments as neat table
     print_args_as_table()

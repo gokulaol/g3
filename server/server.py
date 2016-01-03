@@ -18,6 +18,7 @@ from arguments import global_args, parse_arguments
 from arguments import print_exception, debug_print, debug_pprint
 
 from handle_requests import HandleRequest
+from mongodb_related import mongo_init, mongo_search
 
 ## simple testing
 
@@ -169,7 +170,19 @@ def do_login():
         return "<p>Your login information was correct.</p>"
     else:
         return "<p>Login failed.</p>"
-        
+
+
+# ALL the init code can be placed in this function.
+# Note that the actual server will start AFTER this
+# function executes.
+def server_init():
+    
+    # init the mongo.
+    mongo_init()
+
+    # try a mongo_search here
+    mongo_search('consciousness', 10)
+    
 # 
 #  NOTE: the following code starts the bottle server with
 #        SSL enabled.
@@ -212,6 +225,9 @@ class SSLWSGIRefServer(ServerAdapter):
 def main():
 
     parse_arguments()
+
+    # do my initialization, before starting the server
+    server_init()
     
     srv = SSLWSGIRefServer(host=global_args.listen_host,
                            port=global_args.listen_port)
