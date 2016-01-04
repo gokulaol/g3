@@ -97,7 +97,7 @@ def serve_normal_files(n_file_name):
 @route('/images/<file_name>')
 def serve_image_files(file_name):
     debug_print(5, "image files: file_name = ", file_name)
-    return static_file(file_name, root=global_args.base_dir + 'images')
+    return static_file(file_name, root=global_args.base_dir + 'client/images')
 
     
 # serving bootstrap specific files
