@@ -108,7 +108,7 @@ def serve_bootstrap_files(b_file_name):
     file_name = os.path.basename(b_file_name)
 
     # find the containing dir
-    containing_dir = find_containing_dir(file_name, global_args.base_dir + 'bootstrap-3.3.4')
+    containing_dir = find_containing_dir(file_name, global_args.base_dir + 'client/bootstrap-3.3.4')
 
     # static_file takes care of returning correct STATUS code
     # even if the file is not found.
