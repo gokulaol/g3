@@ -14,7 +14,7 @@ class HandleRequest:
         self.req_params = req_params
         return
 
-    def handle_knowledge_search(self):
+    def handle_knowledge_search(self, return_mode):
 
         try:
 
@@ -25,35 +25,47 @@ class HandleRequest:
             item_limit = 10
             results = mongo_search(search_term, item_limit)
 
-            # search results are in a list, with each
-            # entry being a dictionary.
+            if return_mode == 'HTML':            
+                # search results are in a list, with each
+                # entry being a dictionary.
 
-            tbg = TwitterBootstrap_HTMLGenerator()
+                tbg = TwitterBootstrap_HTMLGenerator()
 
-            # use our bootstrap adapter to generate HTML
-            # but also wrap it in a "jumbotron" class
-            html = '<div class="jumbotron" id="search-result-jumbotron">'
-            for item in results:
-                # Let us make a panel_footer before calling to generate
-                # the entire panel code.
-                footer =  '<b> Date: </b>' + item['d_date'] + '&nbsp &nbsp'
-                footer += '<b> Place: </b>' + item['d_place']
+                # use our bootstrap adapter to generate HTML
+                # but also wrap it in a "jumbotron" class
+                html = '<div class="jumbotron" id="search-result-jumbotron">'
+                for item in results:
+                    # Let us make a panel_footer before calling to generate
+                    # the entire panel code.
+                    footer =  '<b> Date: </b>' + item['d_date'] + '&nbsp &nbsp'
+                    footer += '<b> Place: </b>' + item['d_place']
 
-                html += tbg.generate_panel(n_columns=9,
-                                           panel_color='light-blue',
-                                           panel_body=item['d_knowledge'],
-                                           panel_title=item['d_title'],
-                                           panel_footer=footer)
-            # in this case, we will add the date and place by ourselves.
-            # hence panel_footer was passed as None.
-            # of the 9 columns, have Date in 1-4 and Place in 6-9 (leave 5 empty)
-            #     'Date: ' + item['d_date'] + ' Place: ' + item['d_place'])
+                    html += tbg.generate_panel(n_columns=9,
+                                               panel_color='light-blue',
+                                               panel_body=item['d_knowledge'],
+                                               panel_title=item['d_title'],
+                                               panel_footer=footer)
+                    # in this case, we will add the date and place by ourselves.
+                    # hence panel_footer was passed as None.
+                    # of the 9 columns, have Date in 1-4 and Place in 6-9 (leave 5 empty)
+                    #     'Date: ' + item['d_date'] + ' Place: ' + item['d_place'])
             
             
-            html += '</div>'
-            debug_print(5,"HTML Code:", html)
-            return html
+                html += '</div>'
+                debug_print(5,"HTML Code:", html)
+                return html
 
+            else:
+                json_array = []
+                # return type now is JSON.
+                for item in results:
+                    print type(item), item
+                    json_array.append(item)
+                return_dict = item
+                # return_dict['data'] = json.dump(item)
+                
+                return return_dict
+            
         except:
 
             print_exception(True)
@@ -107,7 +119,7 @@ class HandleRequest:
             return self.handle_knowledge_save()
         elif self.req_params['d_type'] == 'KNOWLEDGE_SEARCH':
             debug_print(5, "POST", self.req_params)
-            return self.handle_knowledge_search()
+            return self.handle_knowledge_search('JSON')
         else:
             return None
         

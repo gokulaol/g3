@@ -7,6 +7,22 @@ function buttonSaveCallback(data)
 {
     alert(data);
 }
+
+// button search success handler
+function buttonSearchSuccessHandler(data)
+{
+    alert("SEARCH SUCCESS");
+    alert(data);
+
+    for (var key in data) {
+	alert(key + ' : ' + data[key]);
+    }
+    
+    //$('#search-result-jumbotron').append(data);
+	    
+    $('#search-container').html(data);
+}
+
 // Actualy Save handler
 function buttonSearchHandler()
 {
@@ -22,10 +38,8 @@ function buttonSearchHandler()
 	type    : "POST",
 	url     : post_url,
 	data    : d_json,
-	success : function (data) {     
-	    alert("SUCCESS"); alert(data);
-	    //$('#search-result-jumbotron').append(data);
-	    $('#search-container').html(data);
+	success : function (data) {
+	    buttonSearchSuccessHandler(data)
 	},
 	//	error   : function (data) { alert("ERROR"); alert(JSON.stringify(data)); },
     });
